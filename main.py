@@ -50,7 +50,7 @@ def get_presigned_url(data: UploadRequest):
             Params={
                 'Bucket': BUCKET_NAME,
                 'Key': key,
-                'ContentType': 'image/jpeg'
+                'ContentType': data.content_type  # Используем переданный тип
             },
             ExpiresIn=300
         )
