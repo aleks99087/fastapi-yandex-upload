@@ -6,6 +6,7 @@ from pydantic import BaseModel
 import boto3
 import os
 from botocore.config import Config
+from typing import Optional
 
 app = FastAPI()
 
