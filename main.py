@@ -38,6 +38,7 @@ BUCKET_NAME = "my-app-frames"
 # Модель запроса
 class UploadRequest(BaseModel):
     key: str
+    content_type: Optional[str] = "image/jpeg"
 
 # Новый POST-эндпоинт
 @app.post("/generate-upload-url")
