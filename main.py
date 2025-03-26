@@ -4,8 +4,19 @@ from fastapi.responses import JSONResponse
 import boto3
 import os
 from botocore.config import Config
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+# Разрешить CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # или указать домен фронтенда, если хочешь ограничить
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 my_config = Config(
     signature_version='s3v4',
