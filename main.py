@@ -1,11 +1,11 @@
 # main.py
-from fastapi import FastAPI, Query
+from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import boto3
 import os
 from botocore.config import Config
-from fastapi.middleware.cors import CORSMiddleware
-
 
 app = FastAPI()
 
@@ -18,6 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Конфиг S3
 my_config = Config(
     signature_version='s3v4',
     region_name='ru-central1',
@@ -34,9 +35,16 @@ s3_client = boto3.client(
 
 BUCKET_NAME = "my-app-frames"
 
-@app.get("/generate-upload-url")
-def get_presigned_url(key: str = Query(...)):
+# Модель запроса
+class UploadRequest(BaseModel):
+    key: str
+
+# Новый POST-эндпоинт
+@app.post("/generate-upload-url")
+def get_presigned_url(data: UploadRequest):
     try:
+        key = data.key
+
         url = s3_client.generate_presigned_url(
             ClientMethod='put_object',
             Params={
