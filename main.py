@@ -13,7 +13,7 @@ app = FastAPI()
 # Разрешить CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # или указать домен фронтенда, если хочешь ограничить
+    allow_origins=["*"],  # или указать домен фронтенда, если хочешь ограничить.
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
