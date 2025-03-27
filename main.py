@@ -21,7 +21,7 @@ app.add_middleware(
     allow_origins=["*"],  # или указать домен фронтенда, если хочешь ограничить
     allow_credentials=True,
     allow_methods=["*"],
-   نallow_headers=["*"],
+    allow_headers=["*"],
 )
 
 # Конфиг S3
